@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .d1{
+            background-color: rgb(105, 105, 104);
+            padding: 2%;
+        }
+        .d2{
+            background-color: rgb(18, 94, 98);
+            color: rgb(255, 98, 0);
+            text-align: center; 
+            margin: auto;
+        
+        }
+        label{
+            font-size: 1.9rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        input[type=text]{
+            height: 15px;
+            width: 400px;
+            font-size: 1.1rem;
+            padding: 2%;
+            
+        }
+        textarea{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 1.2rem;
+            margin: 0% 2% 5% 2% ;
+            padding: 2%;
+        }
+        
+        input[type=submit]{
+            border-radius: 20px;
+            background-color: brown;
+            color: whitesmoke;
+            font-size: 1.3rem;
+            width: 10%;
+            padding: 1% 1% 1% 1%;
+        }
+        input[type=submit]:hover{
+            background-color: skyblue;
+            color: black;
+            border-radius: 20px 15px 20px 15px;
+        }
+    </style>
+    <div class="d1">
+        <form action="{% url 'scrap_web_content' %}" method="post">
+            {% csrf_token %}
+            <div class="d2">
+                <label for="topic">Topic</label><br><br>
+                <input type="text" name="topic" id="topic" value="{{ response.topic }}"> <br><br>
+                <input type="submit" value="Submit">
+                <br><br>
+
+                <label for="news">News</label><br><br>
+                <textarea name="news" id="news" cols="130" rows="50" readonly>{{ response.content }}</textarea><br><br><br>
+            </div>
+        </form>
+    </div>
+    <div>
+        {{ response.error }}
+    </div>
+</body>
+</html>
